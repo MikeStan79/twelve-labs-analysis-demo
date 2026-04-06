@@ -33,7 +33,7 @@ VIDEOS = {
     }
 }
 VIDEO_URLS = {
-    "I_Lost_50_Pounds_Drinking_THIS": "https://www.youtube.com/shorts/u5CJ5KD7eq8",
+    "I_Lost_50_Pounds_Drinking_THIS": "https://www.youtube.com/embed/shorts/u5CJ5KD7eq8",
     "Worlds_Most_Full_Coverage_Foundation": "https://www.youtube.com/shorts/NU9wL9DrDY8",
     "Shot_time": "https://www.youtube.com/shorts/h2oH6IEC92A",
     "Easiest_way_to_make_Dior_Sauvage_for_men": "https://www.youtube.com/shorts/C9V_s4E_pCA",
