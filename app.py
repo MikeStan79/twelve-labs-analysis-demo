@@ -32,16 +32,16 @@ VIDEOS = {
         "makeuptransformation": "69d3529a80a3faf42bda4118"
     }
 }
-VIDEO_URLS = {
-    "I_Lost_50_Pounds_Drinking_THIS": "https://www.youtube.com/embed/shorts/u5CJ5KD7eq8",
-    "Worlds_Most_Full_Coverage_Foundation": "https://www.youtube.com/shorts/NU9wL9DrDY8",
-    "Shot_time": "https://www.youtube.com/shorts/h2oH6IEC92A",
-    "Easiest_way_to_make_Dior_Sauvage_for_men": "https://www.youtube.com/shorts/C9V_s4E_pCA",
-    "An Effortlessly Chic Makeup Tutorial by Bobbi": "https://www.youtube.com/watch?v=0vaT35YjI3o",
-    "Baked_Balance_Brighten_Color_Correcting_Foundation": "https://www.youtube.com/watch?v=ip2_ojS59d0",
-    "Bronzing Powder Makeup Tutorial": "https://www.youtube.com/watch?v=CRP44AE3ewM",
-    "makeuptransformation": "https://www.youtube.com/shorts/UkDiynpBEC4",
-}
+#VIDEO_URLS = {
+   # "I_Lost_50_Pounds_Drinking_THIS": "https://www.youtube.com/embed/shorts/u5CJ5KD7eq8",
+   # "Worlds_Most_Full_Coverage_Foundation": "https://www.youtube.com/shorts/NU9wL9DrDY8",
+   # "Shot_time": "https://www.youtube.com/shorts/h2oH6IEC92A",
+   # "Easiest_way_to_make_Dior_Sauvage_for_men": "https://www.youtube.com/shorts/C9V_s4E_pCA",
+   # "An Effortlessly Chic Makeup Tutorial by Bobbi": "https://www.youtube.com/watch?v=0vaT35YjI3o",
+   # "Baked_Balance_Brighten_Color_Correcting_Foundation": "https://www.youtube.com/watch?v=ip2_ojS59d0",
+   # "Bronzing Powder Makeup Tutorial": "https://www.youtube.com/watch?v=CRP44AE3ewM",
+   # "makeuptransformation": "https://www.youtube.com/shorts/UkDiynpBEC4",
+#}
 # ----------------------------
 # PROMPTS (your improved ones)
 # ----------------------------
@@ -298,9 +298,9 @@ if run_analysis:
                     start = ts_range.split("-")[0]  # take start of range
                     seconds = mmss_to_seconds(start)
             
-                    jump_url = f"{video_url}&t={seconds}s"
+                   # jump_url = f"{video_url}&t={seconds}s"
             
-                    st.markdown(f"[▶ Jump to {ts_range}]({jump_url})")
+                  #  st.markdown(f"[▶ Jump to {ts_range}]({jump_url})")
             
                 st.write(issue["explanation"])
                 st.markdown("---")
