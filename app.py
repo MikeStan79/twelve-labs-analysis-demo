@@ -22,7 +22,7 @@ INDEXES = {
 
 VIDEOS = {
     "69d317e09b2cb1a1df3189d7": {
-        "Worlds_Most_Full_Coverage_Foundation": "69d317e27fbe7f3d0d510056",
+        "Worlds Most Full Coverage Foundation": "69d317e27fbe7f3d0d510056",
         "I_Lost_50_Pounds_Drinking_THIS": "69d334ae1e1c7a47bc661228",
         "Shot_time": "69d334ad80a3faf42bda3cf7",
         "Easiest_way_to_make_Dior_Sauvage_for_men": "69d334ae9b2cb1a1df318e59",
