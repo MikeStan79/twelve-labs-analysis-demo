@@ -286,12 +286,19 @@ if run_analysis:
         st.subheader("Compliance Analysis")
 
         if compliance.get("issues"):
-           for issue in compliance["issues"]:
-                with st.container():
-                    st.markdown(f"### ⚠️ {issue['category'].replace('_',' ').title()}")
-                    st.write(f"Severity: {issue['severity']}")
-                    st.write(f"Timestamps: {', '.join(issue['timestamps'])}")
-                    st.write(issue["explanation"])
+            for issue in compliance["issues"]:
+                st.markdown(f"### ⚠️ {issue['category'].replace('_',' ').title()}")
+            
+                for ts_range in issue["timestamps"]:
+                    start = ts_range.split("-")[0]  # take start of range
+                    seconds = mmss_to_seconds(start)
+            
+                    jump_url = f"{video_url}&t={seconds}s"
+            
+                    st.markdown(f"[▶ Jump to {ts_range}]({jump_url})")
+            
+                st.write(issue["explanation"])
+                st.markdown("---")
         else:
             st.success("No compliance issues detected")
 
