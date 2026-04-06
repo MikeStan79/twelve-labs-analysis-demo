@@ -304,7 +304,7 @@ if run_analysis:
     with tab3:
         st.subheader("Enrichment")
 
-            st.markdown("### Topics")
+        st.markdown("### Topics")
             st.write(", ".join(enrichment.get("topics", [])) or "None")
             
             st.markdown("### Products")
