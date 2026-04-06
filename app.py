@@ -307,39 +307,39 @@ if run_analysis:
         st.markdown("### Topics")
         st.write(", ".join(enrichment.get("topics", [])) or "None")
             
-            st.markdown("### Products")
-            st.write(", ".join(enrichment.get("product_mentions", [])) or "None")
-            
-            st.markdown("### Brands")
-            st.write(", ".join(enrichment.get("brands_detected", [])) or "None")
-            
-            st.markdown("### Visual Elements")
-            st.write(", ".join(enrichment.get("visual_elements", [])) or "None")
-            
-            st.markdown("### Creator Style")
-            st.write(enrichment.get("creator_style", "N/A"))
-            
-            st.markdown("### Demographics")
-            demo = enrichment.get("demographics", {})
-            st.write(f"Age Group: {demo.get('age_group', 'N/A')}")
-            st.write(f"Gender: {demo.get('gender', 'N/A')}")
-            
-            st.markdown("### Video Properties")
-            props = enrichment.get("video_properties", {})
-            st.write(f"Orientation: {props.get('orientation', 'N/A')}")
-            st.write(f"Production Quality: {props.get('production_quality', 'N/A')}")
+        st.markdown("### Products")
+        st.write(", ".join(enrichment.get("product_mentions", [])) or "None")
+        
+        st.markdown("### Brands")
+        st.write(", ".join(enrichment.get("brands_detected", [])) or "None")
+        
+        st.markdown("### Visual Elements")
+        st.write(", ".join(enrichment.get("visual_elements", [])) or "None")
+        
+        st.markdown("### Creator Style")
+        st.write(enrichment.get("creator_style", "N/A"))
+        
+        st.markdown("### Demographics")
+        demo = enrichment.get("demographics", {})
+        st.write(f"Age Group: {demo.get('age_group', 'N/A')}")
+        st.write(f"Gender: {demo.get('gender', 'N/A')}")
+        
+        st.markdown("### Video Properties")
+        props = enrichment.get("video_properties", {})
+        st.write(f"Orientation: {props.get('orientation', 'N/A')}")
+        st.write(f"Production Quality: {props.get('production_quality', 'N/A')}")
     # ----------------------------
     # DESCRIPTION TAB
     # ----------------------------
 
     with tab4:
-            st.subheader("Description")
-            
-            st.markdown("### Short Description")
-            st.write(description.get("short_description", ""))
-            
-            st.markdown("### Detailed Description")
-            st.write(description.get("detailed_description", ""))
+        st.subheader("Description")
+        
+        st.markdown("### Short Description")
+        st.write(description.get("short_description", ""))
+        
+        st.markdown("### Detailed Description")
+        st.write(description.get("detailed_description", ""))
 
     # ----------------------------
     # RAW OUTPUT
