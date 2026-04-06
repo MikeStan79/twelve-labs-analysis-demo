@@ -10,6 +10,11 @@ from twelvelabs_client import (
     build_compliance,
     analyze_video    
 )
+# HELPERS
+def mmss_to_seconds(ts):
+    m, s = ts.split(":")
+    return int(m) * 60 + int(s)
+
 
 INDEXES = {
     "Demo Index": "69d317e09b2cb1a1df3189d7"
