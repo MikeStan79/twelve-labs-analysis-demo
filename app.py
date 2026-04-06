@@ -43,7 +43,7 @@ VIDEOS = {
    # "makeuptransformation": "https://www.youtube.com/shorts/UkDiynpBEC4",
 #}
 # ----------------------------
-# PROMPTS (your improved ones)
+# PROMPTS 
 # ----------------------------
 COMPLIANCE_PROMPT = """
 You are an advertising compliance reviewer for creator-led beauty ads.
