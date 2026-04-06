@@ -289,19 +289,14 @@ if run_analysis:
 
     with tab1:
         st.subheader("Compliance Analysis")
-
+    
         if compliance.get("issues"):
             for issue in compliance["issues"]:
                 st.markdown(f"### ⚠️ {issue['category'].replace('_',' ').title()}")
-            
-                for ts_range in issue["timestamps"]:
-                    start = ts_range.split("-")[0]  # take start of range
-                    seconds = mmss_to_seconds(start)
-            
-                   # jump_url = f"{video_url}&t={seconds}s"
-            
-                  #  st.markdown(f"[▶ Jump to {ts_range}]({jump_url})")
-            
+    
+                # ✅ Clean timestamp display
+                st.write(f"Timestamps: {', '.join(issue['timestamps'])}")
+    
                 st.write(issue["explanation"])
                 st.markdown("---")
         else:
