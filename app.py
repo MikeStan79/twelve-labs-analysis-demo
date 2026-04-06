@@ -305,7 +305,7 @@ if run_analysis:
         st.subheader("Enrichment")
 
         st.markdown("### Topics")
-            st.write(", ".join(enrichment.get("topics", [])) or "None")
+        st.write(", ".join(enrichment.get("topics", [])) or "None")
             
             st.markdown("### Products")
             st.write(", ".join(enrichment.get("product_mentions", [])) or "None")
