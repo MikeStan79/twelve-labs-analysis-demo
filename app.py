@@ -283,7 +283,19 @@ if run_analysis:
 
     with tab2:
         st.subheader("Relevance Analysis")
-        st.json(relevance)
+
+        st.metric("Overall Score", relevance.get("overall_score", "N/A"))
+
+        st.markdown("### Breakdown")
+        st.write(f"Product Relevance: {relevance.get('product_relevance', 'N/A')}")
+        st.write(f"Demonstration Quality: {relevance.get('demonstration_quality', 'N/A')}")
+        st.write(f"Audience Suitability: {relevance.get('audience_suitability', 'N/A')}")
+        st.write(f"Brand Alignment: {relevance.get('brand_alignment', 'N/A')}")
+
+        if relevance.get("reasons"):
+            st.markdown("### Reasons")
+            for r in relevance["reasons"]:
+                st.write(f"- {r}")
 
     # ----------------------------
     # ENRICHMENT TAB
