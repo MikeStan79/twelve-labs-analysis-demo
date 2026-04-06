@@ -23,13 +23,13 @@ INDEXES = {
 VIDEOS = {
     "69d317e09b2cb1a1df3189d7": {
         "Worlds Most Full Coverage Foundation": "69d317e27fbe7f3d0d510056",
-        "I_Lost_50_Pounds_Drinking_THIS": "69d334ae1e1c7a47bc661228",
-        "Shot_time": "69d334ad80a3faf42bda3cf7",
-        "Easiest_way_to_make_Dior_Sauvage_for_men": "69d334ae9b2cb1a1df318e59",
+        "I Lost 50 Pounds Drinking THIS": "69d334ae1e1c7a47bc661228",
+        "Shots Time": "69d334ad80a3faf42bda3cf7",
+        "Easiest way to make Dior Sauvage for men": "69d334ae9b2cb1a1df318e59",
         "An Effortlessly Chic Makeup Tutorial by Bobbi": "69d3529e80a3faf42bda411a",
-        "Baked_Balance_Brighten_Color_Correcting_Foundation": "69d334ae80a3faf42bda3cfb",
+        "Baked Balance Brighten Color Correcting Foundation": "69d334ae80a3faf42bda3cfb",
         "Bronzing Powder Makeup Tutorial": "69d3529d1e1c7a47bc6615bd",
-        "makeuptransformation": "69d3529a80a3faf42bda4118"
+        "Makeup Transformation": "69d3529a80a3faf42bda4118"
     }
 }
 #VIDEO_URLS = {
