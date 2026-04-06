@@ -248,6 +248,10 @@ if run_analysis:
 
     st.markdown("---")
 
+    decision = "APPROVE" if compliance["overall_status"] == "clear" else "REVIEW"
+
+    st.metric("Decision", decision)
+
     # ----------------------------
     # TABS
     # ----------------------------
@@ -264,12 +268,12 @@ if run_analysis:
         st.subheader("Compliance Analysis")
 
         if compliance.get("issues"):
-            for issue in compliance["issues"]:
-                st.markdown(f"### ⚠️ {issue['category'].upper()}")
-                st.write(f"**Severity:** {issue['severity']}")
-                st.write(f"**Timestamps:** {', '.join(issue['timestamps'])}")
-                st.write(issue["explanation"])
-                st.markdown("---")
+           for issue in compliance["issues"]:
+                with st.container():
+                    st.markdown(f"### ⚠️ {issue['category'].replace('_',' ').title()}")
+                    st.write(f"Severity: {issue['severity']}")
+                    st.write(f"Timestamps: {', '.join(issue['timestamps'])}")
+                    st.write(issue["explanation"])
         else:
             st.success("No compliance issues detected")
 
