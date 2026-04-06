@@ -264,10 +264,10 @@ if run_analysis:
             compliance.get("issue_count", 0)
         )
 
-    video_url = VIDEO_URLS.get(video_name)
+    #video_url = VIDEO_URLS.get(video_name)
 
-    if video_url:
-        st.video(video_url)
+    #if video_url:
+       # st.video(video_url)
     
     st.markdown("---")
 
