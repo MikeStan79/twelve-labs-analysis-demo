@@ -259,35 +259,101 @@ if run_analysis:
     # TABS
     # ----------------------------
 
-    tab1, tab2, tab3, tab4 = st.tabs(
-        ["Compliance", "Relevance", "Enrichment", "Description"]
+    tab1, tab2, tab3, tab4, tab5 = st.tabs(
+        ["Compliance", "Relevance", "Enrichment", "Description", "Raw JSON"]
     )
 
-    with tab1:
-        st.subheader("Compliance")
 
+    # ----------------------------
+    # COMPLIANCE TAB
+    # ----------------------------
+
+    with tab1:
+        st.subheader("Compliance Analysis")
+    
         if compliance.get("issues"):
             for issue in compliance["issues"]:
                 st.markdown(f"### ⚠️ {issue['category'].replace('_',' ').title()}")
+    
+                # ✅ Clean timestamp display
                 st.write(f"Timestamps: {', '.join(issue['timestamps'])}")
+    
                 st.write(issue["explanation"])
                 st.markdown("---")
         else:
-            st.success("No issues detected")
+            st.success("No compliance issues detected")
+
+    # ----------------------------
+    # RELEVANCE TAB
+    # ----------------------------
 
     with tab2:
+        st.subheader("Relevance Analysis")
+
         st.metric("Overall Score", relevance.get("overall_score", "N/A"))
 
-        st.write(f"Product Relevance: {relevance.get('product_relevance')}")
-        st.write(f"Demonstration Quality: {relevance.get('demonstration_quality')}")
-        st.write(f"Audience Suitability: {relevance.get('audience_suitability')}")
-        st.write(f"Brand Alignment: {relevance.get('brand_alignment')}")
+        st.markdown("### Breakdown")
+        st.write(f"Product Relevance: {relevance.get('product_relevance', 'N/A')}")
+        st.write(f"Demonstration Quality: {relevance.get('demonstration_quality', 'N/A')}")
+        st.write(f"Audience Suitability: {relevance.get('audience_suitability', 'N/A')}")
+        st.write(f"Brand Alignment: {relevance.get('brand_alignment', 'N/A')}")
+
+        if relevance.get("reasons"):
+            st.markdown("### Reasons")
+            for r in relevance["reasons"]:
+                st.write(f"- {r}")
+
+    # ----------------------------
+    # ENRICHMENT TAB
+    # ----------------------------
 
     with tab3:
-        st.write(enrichment)
+        st.subheader("Enrichment")
+
+        st.markdown("### Topics")
+        st.write(", ".join(enrichment.get("topics", [])) or "None")
+            
+        st.markdown("### Products")
+        st.write(", ".join(enrichment.get("product_mentions", [])) or "None")
+        
+        st.markdown("### Brands")
+        st.write(", ".join(enrichment.get("brands_detected", [])) or "None")
+        
+        st.markdown("### Visual Elements")
+        st.write(", ".join(enrichment.get("visual_elements", [])) or "None")
+        
+        st.markdown("### Creator Style")
+        st.write(enrichment.get("creator_style", "N/A"))
+        
+        st.markdown("### Demographics")
+        demo = enrichment.get("demographics", {})
+        st.write(f"Age Group: {demo.get('age_group', 'N/A')}")
+        st.write(f"Gender: {demo.get('gender', 'N/A')}")
+        
+        st.markdown("### Video Properties")
+        props = enrichment.get("video_properties", {})
+        st.write(f"Orientation: {props.get('orientation', 'N/A')}")
+        st.write(f"Production Quality: {props.get('production_quality', 'N/A')}")
+    # ----------------------------
+    # DESCRIPTION TAB
+    # ----------------------------
 
     with tab4:
-        st.write(description)
+        st.subheader("Description")
+        
+        st.markdown("### Short Description")
+        st.write(description.get("short_description", ""))
+        
+        st.markdown("### Detailed Description")
+        st.write(description.get("detailed_description", ""))
+
+    # ----------------------------
+    # RAW OUTPUT
+    # ----------------------------
+
+    with tab5:
+        st.subheader("Full Output")
+        st.json(final_output)
 
 # ----------------------------
 # CACHE VIEW
