@@ -188,10 +188,21 @@ st.title("🎥 Video Analysis Platform (v2)")
 st.caption("Includes caching + rerun control")
 
 # Sidebar
+# Sidebar controls
 video_name = st.sidebar.selectbox("Select Video", list(VIDEOS.keys()))
 video_id = VIDEOS[video_name]
 
 use_cache = st.sidebar.checkbox("Use cached results", value=True)
+
+# Cached viewer
+selected_cached = st.sidebar.selectbox(
+    "View Cached Video",
+    list(st.session_state.results_cache.keys()),
+    format_func=lambda x: ID_TO_NAME.get(x, x)
+) if st.session_state.results_cache else None
+
+load_cached = st.sidebar.button("📂 Load Cached Result")
+
 run_analysis = st.sidebar.button("🚀 Run Analysis")
 
 st.markdown(f"### Selected Video: **{video_name}**")
@@ -215,6 +226,19 @@ if load_cached and selected_cached in st.session_state.results_cache:
 # ----------------------------
 
 cache_key = video_id
+
+if load_cached and selected_cached in st.session_state.results_cache:
+
+    st.info("Loaded cached result")
+
+    final_output = st.session_state.results_cache[selected_cached]
+
+    compliance = final_output["compliance"]
+    relevance = final_output["relevance"]
+    enrichment = final_output["enrichment"]
+    description = final_output["description"]
+
+    st.session_state["display_results"] = final_output
 
 if run_analysis or "display_results" in st.session_state:
 
@@ -241,7 +265,8 @@ if run_analysis or "display_results" in st.session_state:
     relevance = final_output["relevance"]
     enrichment = final_output["enrichment"]
     description = final_output["description"]
-
+    
+if selected_cached and load_cached and selected_cached in st.session_state.results_cache:
     # ----------------------------
     # SUMMARY
     # ----------------------------
