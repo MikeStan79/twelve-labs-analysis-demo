@@ -17,6 +17,12 @@ VIDEOS = {
     "Worlds Most Full Coverage Foundation": "69d317e27fbe7f3d0d510056",
     "I Lost 50 Pounds Drinking THIS": "69d334ae1e1c7a47bc661228",
     "Shots Time": "69d334ad80a3faf42bda3cf7",
+    "Easiest way to make Dior Sauvage for men": "69d334ae9b2cb1a1df318e59",
+    "An Effortlessly Chic Makeup Tutorial by Bobbi": "69d3529e80a3faf42bda411a",
+    "Baked Balance Brighten Color Correcting Foundation": "69d334ae80a3faf42bda3cfb",
+    "Bronzing Powder Makeup Tutorial": "69d3529d1e1c7a47bc6615bd",
+    "Alicias 10 Minute Makeup Routine": "69d7ccbe4f56f5868588c8bb",
+    "Makeup Transformation": "69d3529a80a3faf42bda4118"
 }
 
 # ----------------------------
