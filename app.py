@@ -29,6 +29,7 @@ VIDEOS = {
         "An Effortlessly Chic Makeup Tutorial by Bobbi": "69d3529e80a3faf42bda411a",
         "Baked Balance Brighten Color Correcting Foundation": "69d334ae80a3faf42bda3cfb",
         "Bronzing Powder Makeup Tutorial": "69d3529d1e1c7a47bc6615bd",
+        "Alicias 10 Minute Makeup Routine": "69d7ccbe4f56f5868588c8bb",
         "Makeup Transformation": "69d3529a80a3faf42bda4118"
     }
 }
