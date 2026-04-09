@@ -187,63 +187,51 @@ st.set_page_config(page_title="Video Analysis v2", layout="wide")
 st.title("🎥 Video Analysis Platform (v2)")
 st.caption("Includes caching + rerun control")
 
-# Sidebar
-# Sidebar controls
+# ----------------------------
+# SIDEBAR
+# ----------------------------
+
 video_name = st.sidebar.selectbox("Select Video", list(VIDEOS.keys()))
 video_id = VIDEOS[video_name]
 
 use_cache = st.sidebar.checkbox("Use cached results", value=True)
 
-# Cached viewer
-selected_cached = st.sidebar.selectbox(
-    "View Cached Video",
-    list(st.session_state.results_cache.keys()),
-    format_func=lambda x: ID_TO_NAME.get(x, x)
-) if st.session_state.results_cache else None
+# Cached viewer (safe)
+if st.session_state.results_cache:
+    selected_cached = st.sidebar.selectbox(
+        "View Cached Video",
+        list(st.session_state.results_cache.keys()),
+        format_func=lambda x: ID_TO_NAME.get(x, x)
+    )
+else:
+    selected_cached = None
 
 load_cached = st.sidebar.button("📂 Load Cached Result")
-
 run_analysis = st.sidebar.button("🚀 Run Analysis")
 
 st.markdown(f"### Selected Video: **{video_name}**")
 
-if load_cached and selected_cached in st.session_state.results_cache:
-
-    st.info("Loaded cached result")
-
-    final_output = st.session_state.results_cache[selected_cached]
-
-    compliance = final_output["compliance"]
-    relevance = final_output["relevance"]
-    enrichment = final_output["enrichment"]
-    description = final_output["description"]
-
-    # ✅ Render results immediately (skip API)
-    st.session_state["display_results"] = final_output
-
 # ----------------------------
-# ANALYSIS LOGIC
+# MAIN STATE LOGIC
 # ----------------------------
 
-cache_key = video_id
+final_output = None
 
-if load_cached and selected_cached in st.session_state.results_cache:
+# 🔹 Load cached result
+if load_cached and selected_cached:
+    if selected_cached in st.session_state.results_cache:
+        st.info("Loaded cached result")
+        final_output = st.session_state.results_cache[selected_cached]
 
-    st.info("Loaded cached result")
+# 🔹 Run analysis
+elif run_analysis:
 
-    final_output = st.session_state.results_cache[selected_cached]
+    cache_key = video_id
 
-    compliance = final_output["compliance"]
-    relevance = final_output["relevance"]
-    enrichment = final_output["enrichment"]
-    description = final_output["description"]
+    if use_cache and cache_key in st.session_state.results_cache:
+        st.info("Using cached results")
+        final_output = st.session_state.results_cache[cache_key]
 
-    st.session_state["display_results"] = final_output
-
-if run_analysis or "display_results" in st.session_state:
-
-    if "display_results" in st.session_state:
-        final_output = st.session_state["display_results"]
     else:
         with st.spinner("Running analysis..."):
 
@@ -261,16 +249,18 @@ if run_analysis or "display_results" in st.session_state:
 
             st.session_state.results_cache[cache_key] = final_output
 
+# ----------------------------
+# DISPLAY RESULTS
+# ----------------------------
+
+if final_output:
+
     compliance = final_output["compliance"]
     relevance = final_output["relevance"]
     enrichment = final_output["enrichment"]
     description = final_output["description"]
-    
-if selected_cached and load_cached and selected_cached in st.session_state.results_cache:
-    # ----------------------------
-    # SUMMARY
-    # ----------------------------
 
+    # SUMMARY
     st.markdown("## 🔎 Summary")
 
     col1, col2, col3 = st.columns(3)
@@ -284,10 +274,7 @@ if selected_cached and load_cached and selected_cached in st.session_state.resul
 
     st.markdown("---")
 
-    # ----------------------------
     # TABS
-    # ----------------------------
-
     tab1, tab2, tab3, tab4 = st.tabs(
         ["Compliance", "Relevance", "Enrichment", "Description"]
     )
@@ -319,18 +306,10 @@ if selected_cached and load_cached and selected_cached in st.session_state.resul
         st.write(description)
 
 # ----------------------------
-# CACHE VIEW
+# CACHE DISPLAY
 # ----------------------------
 
 if st.session_state.results_cache:
     st.sidebar.markdown("### Cached Videos")
     for k in st.session_state.results_cache:
-        name = ID_TO_NAME.get(k, k)
-        st.sidebar.write(name)
-
-selected_cached = st.sidebar.selectbox(
-    "View Cached Video",
-    list(st.session_state.results_cache.keys()),
-    format_func=lambda x: ID_TO_NAME.get(x, x)
-)
-load_cached = st.sidebar.button("📂 Load Cached Result")
+        st.sidebar.write(ID_TO_NAME.get(k, k))
