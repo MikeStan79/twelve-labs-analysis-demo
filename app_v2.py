@@ -26,12 +26,6 @@ VIDEOS = {
 }
 
 # ----------------------------
-# HELPERS
-# ----------------------------
-
-ID_TO_NAME = {v: k for k, v in VIDEOS.items()}
-
-# ----------------------------
 # PROMPTS
 # ----------------------------
 
@@ -193,49 +187,26 @@ st.set_page_config(page_title="Video Analysis v2", layout="wide")
 st.title("🎥 Video Analysis Platform (v2)")
 st.caption("Includes caching + rerun control")
 
-# ----------------------------
-# SIDEBAR
-# ----------------------------
-
+# Sidebar
 video_name = st.sidebar.selectbox("Select Video", list(VIDEOS.keys()))
 video_id = VIDEOS[video_name]
 
 use_cache = st.sidebar.checkbox("Use cached results", value=True)
-
-# Cached viewer (safe)
-if st.session_state.results_cache:
-    selected_cached = st.sidebar.selectbox(
-        "View Cached Video",
-        list(st.session_state.results_cache.keys()),
-        format_func=lambda x: ID_TO_NAME.get(x, x)
-    )
-else:
-    selected_cached = None
-
-load_cached = st.sidebar.button("📂 Load Cached Result")
 run_analysis = st.sidebar.button("🚀 Run Analysis")
 
 st.markdown(f"### Selected Video: **{video_name}**")
 
 # ----------------------------
-# MAIN STATE LOGIC
+# ANALYSIS LOGIC
 # ----------------------------
 
-final_output = None
+cache_key = video_id
 
-# 🔹 Load cached result
-if load_cached and selected_cached:
-    if selected_cached in st.session_state.results_cache:
-        st.info("Loaded cached result")
-        final_output = st.session_state.results_cache[selected_cached]
-
-# 🔹 Run analysis
-elif run_analysis:
-
-    cache_key = video_id
+if run_analysis:
 
     if use_cache and cache_key in st.session_state.results_cache:
         st.info("Using cached results")
+
         final_output = st.session_state.results_cache[cache_key]
 
     else:
@@ -255,18 +226,15 @@ elif run_analysis:
 
             st.session_state.results_cache[cache_key] = final_output
 
-# ----------------------------
-# DISPLAY RESULTS
-# ----------------------------
-
-if final_output:
-
     compliance = final_output["compliance"]
     relevance = final_output["relevance"]
     enrichment = final_output["enrichment"]
     description = final_output["description"]
 
+    # ----------------------------
     # SUMMARY
+    # ----------------------------
+
     st.markdown("## 🔎 Summary")
 
     col1, col2, col3 = st.columns(3)
@@ -280,7 +248,10 @@ if final_output:
 
     st.markdown("---")
 
+    # ----------------------------
     # TABS
+    # ----------------------------
+
     tab1, tab2, tab3, tab4 = st.tabs(
         ["Compliance", "Relevance", "Enrichment", "Description"]
     )
@@ -312,10 +283,10 @@ if final_output:
         st.write(description)
 
 # ----------------------------
-# CACHE DISPLAY
+# CACHE VIEW
 # ----------------------------
 
 if st.session_state.results_cache:
     st.sidebar.markdown("### Cached Videos")
     for k in st.session_state.results_cache:
-        st.sidebar.write(ID_TO_NAME.get(k, k))
+        st.sidebar.write(k)
