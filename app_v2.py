@@ -26,6 +26,13 @@ VIDEOS = {
 }
 
 # ----------------------------
+# HELPERS
+# ----------------------------
+
+ID_TO_NAME = {v: k for k, v in VIDEOS.items()}
+
+
+# ----------------------------
 # PROMPTS
 # ----------------------------
 
@@ -289,4 +296,5 @@ if run_analysis:
 if st.session_state.results_cache:
     st.sidebar.markdown("### Cached Videos")
     for k in st.session_state.results_cache:
-        st.sidebar.write(k)
+        name = ID_TO_NAME.get(k, k)
+        st.sidebar.write(name)
