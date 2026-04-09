@@ -196,19 +196,30 @@ run_analysis = st.sidebar.button("🚀 Run Analysis")
 
 st.markdown(f"### Selected Video: **{video_name}**")
 
+if load_cached and selected_cached in st.session_state.results_cache:
+
+    st.info("Loaded cached result")
+
+    final_output = st.session_state.results_cache[selected_cached]
+
+    compliance = final_output["compliance"]
+    relevance = final_output["relevance"]
+    enrichment = final_output["enrichment"]
+    description = final_output["description"]
+
+    # ✅ Render results immediately (skip API)
+    st.session_state["display_results"] = final_output
+
 # ----------------------------
 # ANALYSIS LOGIC
 # ----------------------------
 
 cache_key = video_id
 
-if run_analysis:
+if run_analysis or "display_results" in st.session_state:
 
-    if use_cache and cache_key in st.session_state.results_cache:
-        st.info("Using cached results")
-
-        final_output = st.session_state.results_cache[cache_key]
-
+    if "display_results" in st.session_state:
+        final_output = st.session_state["display_results"]
     else:
         with st.spinner("Running analysis..."):
 
@@ -297,3 +308,4 @@ selected_cached = st.sidebar.selectbox(
     list(st.session_state.results_cache.keys()),
     format_func=lambda x: ID_TO_NAME.get(x, x)
 )
+load_cached = st.sidebar.button("📂 Load Cached Result")
